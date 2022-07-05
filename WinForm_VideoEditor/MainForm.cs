@@ -34,9 +34,6 @@ namespace WinForm_VideoEditor {
       // Disable 'TopLevel' flag
       tl.TopLevel = false;
 
-      // Set background color
-      tl.BackColor = Color.FromArgb(64, 64, 64);
-
       // Set border style
       tl.FormBorderStyle = FormBorderStyle.None;
 
@@ -48,6 +45,26 @@ namespace WinForm_VideoEditor {
 
       // Size
       tl.Size = new Size(this.Width - 16, this.Height - this.pictureBox_seekBar.Bottom - 38);
+
+
+      // ------
+
+      var obj = new TLObject(0, 0);
+
+      obj.kind = TLObject.Kind.Video;
+      obj.length = 150;
+      obj.name = "";
+      tl.add_object(obj);
+
+      obj = new TLObject(0, 0);
+      obj.kind = TLObject.Kind.Video;
+      obj.length = 150;
+      obj.layer = 2;
+      obj.name = "";
+      tl.add_object(obj);
+
+      // ------
+
 
       return tl;
     }
@@ -64,15 +81,22 @@ namespace WinForm_VideoEditor {
       // Create a new timeline instance
       this._timeline_form = init_timeline_inst(this._timeline_form);
 
+
+
       // Add timeline
       this.Controls.Add(this._timeline_form);
 
 
       this._timeline_form.Show();
 
+
     }
 
     private void newProjectToolStripMenuItem_Click(object sender, EventArgs e) {
+
+    }
+
+    private void MainForm_Load(object sender, EventArgs e) {
 
     }
   }

@@ -23,20 +23,35 @@ namespace WinForm_VideoEditor {
     public string name;
     public object data;
 
-    public int Layer;
-    public int Position;
+    public int layer;
+    public int position;
+
+    public int length;
 
     public TLObject(int layer, int position) {
       this.kind = Kind.None;
       this.name = string.Empty;
       this.data = null;
 
-      this.Layer = layer;
-      this.Position = position;
+      this.layer = layer;
+      this.position = position;
 
 
     }
 
+    public Color color {
+      get {
+        var _default = Color.DimGray;
+
+        switch (this.kind) {
+          case Kind.None: return _default;
+          case Kind.Text: return Color.ForestGreen;
+          case Kind.Sound: return Color.RoyalBlue;
+        }
+
+        return _default;
+      }
+    }
 
 
   }
