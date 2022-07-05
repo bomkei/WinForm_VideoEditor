@@ -77,12 +77,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TimelineCore\TimelineCore.cs" />
-    <Compile Include="Types\TLObject\TLObject.cs" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="Timeline\Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeline\Helpers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeline\MouseEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeline\Types\TLObject.cs" />
     <Compile Include="ObjectConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TimelineForm.cs">
+    <Compile Include="Timeline\Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.cs">

@@ -10,9 +10,15 @@ using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
   public partial class ObjectConfigForm : Form {
+    TLObject obj;
 
     public ObjectConfigForm() {
+
     }
+
+    public void reset(TLObject obj) {
+    }
+
 
 
   }

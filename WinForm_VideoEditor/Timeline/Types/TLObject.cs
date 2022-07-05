@@ -40,12 +40,12 @@ namespace WinForm_VideoEditor {
     }
 
     public TLObject(int layer, int position) {
-      this.kind = Kind.None;
-      this.name = string.Empty;
-      //this.data = null;
+      kind = Kind.None;
+      name = string.Empty;
+      //data = null;
 
-      this.layer = layer;
-      this.position = position;
+      layer = layer;
+      position = position;
 
 
     }
@@ -54,7 +54,7 @@ namespace WinForm_VideoEditor {
       get {
         var _default = Color.DimGray;
 
-        switch (this.kind) {
+        switch (kind) {
           case Kind.None: return _default;
           case Kind.Text: return Color.ForestGreen;
           case Kind.Sound: return Color.RoyalBlue;

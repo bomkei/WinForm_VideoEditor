@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace WinForm_VideoEditor {
     //  Constructor
     // ---------------------------------------------------------------- //
     public MainForm() {
-      this.init_form();
+      init_form();
 
 
     }
@@ -41,17 +42,17 @@ namespace WinForm_VideoEditor {
       tl.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
 
       // Location on MainForm
-      tl.Location = new Point(0, this.pictureBox_seekBar.Bottom);
+      tl.Location = new Point(0, pictureBox_seekBar.Bottom);
 
       // Size
-      tl.Size = new Size(this.Width - 16, this.Height - this.pictureBox_seekBar.Bottom - 38);
+      tl.Size = new Size(Width - 16, Height - pictureBox_seekBar.Bottom - 38);
 
 
       // ------
 
       var obj = new TLObject(0, 0);
 
-      obj.kind = TLObject.Kind.Video;
+      obj.kind = TLObject.Kind.Text;
       obj.length = 300;
       obj.name = "";
       tl.add_object(obj);
@@ -75,19 +76,19 @@ namespace WinForm_VideoEditor {
     //  Initialize MainForm
     // ---------------------------------------------------------------- //
     void init_form() {
-      this.InitializeComponent();
+      InitializeComponent();
 
 
       // Create a new timeline instance
-      this._timeline_form = init_timeline_inst(this._timeline_form);
+      _timeline_form = init_timeline_inst(_timeline_form);
 
 
 
       // Add timeline
-      this.Controls.Add(this._timeline_form);
+      Controls.Add(_timeline_form);
 
-
-      this._timeline_form.Show();
+      // Show timeline
+      _timeline_form.Show();
 
 
     }
@@ -97,6 +98,10 @@ namespace WinForm_VideoEditor {
     }
 
     private void MainForm_Load(object sender, EventArgs e) {
+
+    }
+
+    private void textToolStripMenuItem_Click(object sender, EventArgs e) {
 
     }
   }

@@ -9,25 +9,12 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
+  public partial class TimelineForm : Form {
 
-  //public partial class TimelineCore {
-
-  //  public List<TLObject> objects {
-  //    get;
-  //    private set;
-  //  }
-
-  //  public TimelineCore() {
-  //    this.objects = new List<TLObject>();
+    private void TimelineForm_SizeChanged(object sender, EventArgs e) {
+      draw();
+    }
 
 
-
-  //  }
-
-
-
-
-  //}
-
-
+  }
 }
