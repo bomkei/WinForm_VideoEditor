@@ -54,6 +54,7 @@
       this.addObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuBar.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).BeginInit();
@@ -166,7 +167,8 @@
       // debugToolStripMenuItem
       // 
       this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.controlToolStripMenuItem});
+            this.controlToolStripMenuItem,
+            this.consoleToolStripMenuItem});
       this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.White;
       this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
       this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
@@ -201,7 +203,7 @@
       this.ctxMenuStrip_timeline.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addObjectToolStripMenuItem});
       this.ctxMenuStrip_timeline.Name = "ctxMenuStrip_timeline";
-      this.ctxMenuStrip_timeline.Size = new System.Drawing.Size(181, 48);
+      this.ctxMenuStrip_timeline.Size = new System.Drawing.Size(133, 26);
       // 
       // button1
       // 
@@ -280,6 +282,13 @@
       this.videoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.videoToolStripMenuItem.Text = "Video";
       // 
+      // consoleToolStripMenuItem
+      // 
+      this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+      this.consoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.consoleToolStripMenuItem.Text = "console";
+      this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -337,6 +346,7 @@
     private System.Windows.Forms.ToolStripMenuItem addObjectToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
   }
 }
 

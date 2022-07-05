@@ -15,12 +15,18 @@ namespace WinForm_VideoEditor {
     TimelineForm _timeline_form;  // Timeline
 
 
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern bool AllocConsole();
+    
     // ---------------------------------------------------------------- //
     //  Constructor
     // ---------------------------------------------------------------- //
     public MainForm() {
+      AllocConsole();
+
       init_form();
 
+      Debug.Alert();
 
     }
 
@@ -102,6 +108,10 @@ namespace WinForm_VideoEditor {
     }
 
     private void textToolStripMenuItem_Click(object sender, EventArgs e) {
+
+    }
+
+    private void consoleToolStripMenuItem_Click(object sender, EventArgs e) {
 
     }
   }

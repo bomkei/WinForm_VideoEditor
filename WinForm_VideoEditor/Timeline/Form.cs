@@ -50,12 +50,7 @@ namespace WinForm_VideoEditor {
       private set;
     }
 
-    [System.Runtime.InteropServices.DllImport("Kernel32.dll")]
-    static extern bool AllocConsole();
-
     public TimelineForm(MainForm mainform) {
-
-      AllocConsole();
 
       _mainform = mainform;
 
