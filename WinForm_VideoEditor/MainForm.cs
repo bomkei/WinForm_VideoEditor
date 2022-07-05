@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,12 +64,11 @@ namespace WinForm_VideoEditor {
       obj.name = "";
       tl.add_object(obj);
 
-      obj = new TLObject(0, 0);
-      obj.kind = TLObject.Kind.Video;
-      obj.length = 150;
-      obj.layer = 2;
-      obj.name = "";
-      tl.add_object(obj);
+      var vi = new TLVideoObject(2, 0);
+      vi.path = @"C:\Users\mrzkr\Videos\2022-07-06 02-23-51.mkv.mp4";
+      vi.name = Path.GetFileName(vi.path);
+      vi.length = 150;
+      tl.add_object(vi);
 
       // ------
 
@@ -84,11 +84,10 @@ namespace WinForm_VideoEditor {
     void init_form() {
       InitializeComponent();
 
+      button1.GotFocus += (object obj, EventArgs e) => { this.ActiveControl = _timeline_form; };
 
       // Create a new timeline instance
       _timeline_form = init_timeline_inst(_timeline_form);
-
-
 
       // Add timeline
       Controls.Add(_timeline_form);
@@ -105,14 +104,13 @@ namespace WinForm_VideoEditor {
 
     private void MainForm_Load(object sender, EventArgs e) {
 
-    }
-
-    private void textToolStripMenuItem_Click(object sender, EventArgs e) {
+      this.ActiveControl = _timeline_form;
 
     }
 
     private void consoleToolStripMenuItem_Click(object sender, EventArgs e) {
 
     }
+
   }
 }

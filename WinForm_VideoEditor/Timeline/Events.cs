@@ -15,6 +15,19 @@ namespace WinForm_VideoEditor {
       draw();
     }
 
+    private void TimelineForm_KeyDown(object sender, KeyEventArgs e) {
+
+
+
+
+    }
+
+    private void TimelineForm_KeyUp(object sender, KeyEventArgs e) {
+
+
+    }
+
+
 
   }
 }

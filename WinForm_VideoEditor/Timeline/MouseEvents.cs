@@ -37,7 +37,7 @@ namespace WinForm_VideoEditor {
           _obj_click_diff = _clicked_obj.position - ex;
         }
         else if (e.Button == MouseButtons.Right) {
-          _mainform.ctxMenuStrip_tlobj.Show(_pictureBox_layers, e.Location);
+          ctxMenuStrip_tlobj.Show(_pictureBox_layers, e.Location);
         }
       }
 

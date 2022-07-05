@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-
-
   public partial class TLObject {
     public enum Kind {
       None,
@@ -42,29 +40,23 @@ namespace WinForm_VideoEditor {
     public TLObject(int layer, int position) {
       kind = Kind.None;
       name = string.Empty;
-      //data = null;
 
-      layer = layer;
-      position = position;
+      this.layer = layer;
+      this.position = position;
 
 
     }
 
     public Color color {
       get {
-        var _default = Color.DimGray;
-
         switch (kind) {
-          case Kind.None: return _default;
-          case Kind.Text: return Color.ForestGreen;
+          case Kind.None: break;
+          case Kind.Text: return Color.LightGreen;
           case Kind.Sound: return Color.RoyalBlue;
         }
 
-        return _default;
+        return Color.DimGray;
       }
     }
-
-
   }
-
 }

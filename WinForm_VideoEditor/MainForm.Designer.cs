@@ -23,7 +23,6 @@
     /// コード エディターで変更しないでください。
     /// </summary>
     private void InitializeComponent() {
-      this.components = new System.ComponentModel.Container();
       this.menuBar = new System.Windows.Forms.MenuStrip();
       this.あいうえおToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,24 +41,11 @@
       this.controlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.pictureBox_preview = new System.Windows.Forms.PictureBox();
       this.pictureBox_seekBar = new System.Windows.Forms.PictureBox();
-      this.ctxMenuStrip_timeline = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.button1 = new System.Windows.Forms.Button();
-      this.ctxMenuStrip_tlobj = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.trimToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-      this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-      this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.addObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuBar.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).BeginInit();
-      this.ctxMenuStrip_timeline.SuspendLayout();
-      this.ctxMenuStrip_tlobj.SuspendLayout();
       this.SuspendLayout();
       // 
       // menuBar
@@ -198,13 +184,6 @@
       this.pictureBox_seekBar.TabIndex = 3;
       this.pictureBox_seekBar.TabStop = false;
       // 
-      // ctxMenuStrip_timeline
-      // 
-      this.ctxMenuStrip_timeline.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addObjectToolStripMenuItem});
-      this.ctxMenuStrip_timeline.Name = "ctxMenuStrip_timeline";
-      this.ctxMenuStrip_timeline.Size = new System.Drawing.Size(133, 26);
-      // 
       // button1
       // 
       this.button1.Location = new System.Drawing.Point(590, 384);
@@ -213,74 +192,6 @@
       this.button1.TabIndex = 5;
       this.button1.Text = "再生";
       this.button1.UseVisualStyleBackColor = true;
-      // 
-      // ctxMenuStrip_tlobj
-      // 
-      this.ctxMenuStrip_tlobj.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.trimToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.hideToolStripMenuItem,
-            this.showToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.deleteToolStripMenuItem});
-      this.ctxMenuStrip_tlobj.Name = "ctxMenuStrip_tlobj";
-      this.ctxMenuStrip_tlobj.Size = new System.Drawing.Size(108, 104);
-      // 
-      // trimToolStripMenuItem
-      // 
-      this.trimToolStripMenuItem.Name = "trimToolStripMenuItem";
-      this.trimToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-      this.trimToolStripMenuItem.Text = "Trim";
-      // 
-      // toolStripSeparator6
-      // 
-      this.toolStripSeparator6.Name = "toolStripSeparator6";
-      this.toolStripSeparator6.Size = new System.Drawing.Size(104, 6);
-      // 
-      // hideToolStripMenuItem
-      // 
-      this.hideToolStripMenuItem.Name = "hideToolStripMenuItem";
-      this.hideToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-      this.hideToolStripMenuItem.Text = "Hide";
-      // 
-      // showToolStripMenuItem
-      // 
-      this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-      this.showToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-      this.showToolStripMenuItem.Text = "Show";
-      // 
-      // toolStripSeparator5
-      // 
-      this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(104, 6);
-      // 
-      // deleteToolStripMenuItem
-      // 
-      this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-      this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-      this.deleteToolStripMenuItem.Text = "Delete";
-      // 
-      // addObjectToolStripMenuItem
-      // 
-      this.addObjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.textToolStripMenuItem,
-            this.videoToolStripMenuItem});
-      this.addObjectToolStripMenuItem.Name = "addObjectToolStripMenuItem";
-      this.addObjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.addObjectToolStripMenuItem.Text = "Add object";
-      // 
-      // textToolStripMenuItem
-      // 
-      this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-      this.textToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.textToolStripMenuItem.Text = "Text";
-      this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
-      // 
-      // videoToolStripMenuItem
-      // 
-      this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-      this.videoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.videoToolStripMenuItem.Text = "Video";
       // 
       // consoleToolStripMenuItem
       // 
@@ -307,8 +218,6 @@
       this.menuBar.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).EndInit();
-      this.ctxMenuStrip_timeline.ResumeLayout(false);
-      this.ctxMenuStrip_tlobj.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -335,17 +244,6 @@
     private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.ToolStripMenuItem trimToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-    private System.Windows.Forms.ToolStripMenuItem hideToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-    private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-    public System.Windows.Forms.ContextMenuStrip ctxMenuStrip_tlobj;
-    public System.Windows.Forms.ContextMenuStrip ctxMenuStrip_timeline;
-    private System.Windows.Forms.ToolStripMenuItem addObjectToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
   }
 }
