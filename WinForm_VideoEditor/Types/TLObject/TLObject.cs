@@ -21,17 +21,28 @@ namespace WinForm_VideoEditor {
 
     public Kind kind;
     public string name;
-    public object data;
 
     public int layer;
     public int position;
 
     public int length;
 
+    public int center {
+      get {
+        return position + length / 2;
+      }
+    }
+
+    public int endpos {
+      get {
+        return position + length;
+      }
+    }
+
     public TLObject(int layer, int position) {
       this.kind = Kind.None;
       this.name = string.Empty;
-      this.data = null;
+      //this.data = null;
 
       this.layer = layer;
       this.position = position;

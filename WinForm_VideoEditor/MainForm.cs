@@ -52,7 +52,7 @@ namespace WinForm_VideoEditor {
       var obj = new TLObject(0, 0);
 
       obj.kind = TLObject.Kind.Video;
-      obj.length = 150;
+      obj.length = 300;
       obj.name = "";
       tl.add_object(obj);
 

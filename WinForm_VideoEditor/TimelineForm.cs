@@ -31,6 +31,9 @@ namespace WinForm_VideoEditor {
 
     bool _is_mouse_down;
     int _obj_click_diff;
+    TLObject _obj_collid;
+    int _obj_collid_index;
+    int _clicked_obj_index;
     TLObject _clicked_obj;
     MouseBehaviorKind _mouse_behavior_kind;
 
@@ -45,7 +48,12 @@ namespace WinForm_VideoEditor {
       private set;
     }
 
+    [System.Runtime.InteropServices.DllImport("Kernel32.dll")]
+    static extern bool AllocConsole();
+
     public TimelineForm(MainForm mainform) {
+
+      AllocConsole();
 
       this._mainform = mainform;
 
@@ -72,20 +80,25 @@ namespace WinForm_VideoEditor {
 
       // frames ?
       {
-        int spos = seekbar_pos;
-        int hour = spos / (video_FPS * 60 * 60);
-        int min = spos / (video_FPS * 60);
-        double sec = (double)spos / (double)video_FPS;
+        
 
         double blockw = video_FPS * tlScale;
-        int incl = 100 / (int)blockw;
+        int incl = 150 / (int)blockw;
 
         gra.FillRectangle(new SolidBrush(Color.FromArgb(56, 56, 56)), 0, 0, _pictureBox_layers.Width, frameBarHeight);
 
-        for (int i = 0, j = (int)(_pictureBox_layers.Width / video_FPS * tlScale); i <= j; i += incl) {
-          int x = i * (int)blockw;
+        for (int f = 0, i = 0, j = (int)((_pictureBox_layers.Width + scroll_pos) / video_FPS * tlScale); i <= j; i += incl, f += incl * video_FPS) {
+          int x = (int)(i * blockw - scroll_pos * tlScale);
+
+          if (x < 0)
+            continue;
+
+          int hour = f/ (video_FPS * 60 * 60);
+          int min = f / (video_FPS * 60);
+          double sec = (double)f / (double)video_FPS;
 
           gra.DrawLine(Pens.White, x, 0, x, frameBarHeight);
+          gra.DrawString($"{hour}:{min}:{sec}", _font, Brushes.Gray, x, 2);
         }
 
         dy += frameBarHeight;
@@ -100,11 +113,7 @@ namespace WinForm_VideoEditor {
         foreach (var obj in this.objects) {
           var loc = new Point(obj.position - this.scroll_pos, dy + obj.layer * LayerHeight);
 
-          if (loc.Y > _actual_max || loc.X > _pictureBox_layers.Width) {
-            continue;
-          }
-
-          if (obj.layer > layersCount) {
+          if (obj.layer >= layersCount) {
             for (; layersCount <= obj.layer; layersCount++) {
               if (layersCount < 0)
                 continue;
@@ -116,8 +125,18 @@ namespace WinForm_VideoEditor {
 
           }
 
+          if (loc.Y > _actual_max || loc.X > _pictureBox_layers.Width) {
+            continue;
+          }
+
           gra.FillRectangle(new SolidBrush(obj.color), loc.X, loc.Y, obj.length, this.LayerHeight - 1);
-          gra.DrawRectangle(Pens.LightGray, loc.X, loc.Y, obj.length - 1, this.LayerHeight - 1);
+
+          if (obj == _clicked_obj) {
+            gra.DrawRectangle(Pens.DodgerBlue, loc.X, loc.Y, obj.length - 1, this.LayerHeight - 1);
+          }
+          else {
+            gra.DrawRectangle(Pens.LightGray, loc.X, loc.Y, obj.length - 1, this.LayerHeight - 1);
+          }
 
 
 
@@ -144,7 +163,8 @@ namespace WinForm_VideoEditor {
         gra.DrawRectangle(Pens.Gray,
           0, this._pictureBox_layers.Height - barw, this._pictureBox_layers.Width - 1, barw - 1);
 
-        gra.DrawString($"Position = {seekbar_pos}",
+        gra.DrawString(
+          $"Scrollpos={scroll_pos}, Seekbar={seekbar_pos}, Clicked={objects.IndexOf(_clicked_obj)}, Collid={_obj_collid_index}",
           _font, Brushes.LightGray, 8, this._pictureBox_layers.Height - barw + 4);
       }
 
@@ -168,6 +188,7 @@ namespace WinForm_VideoEditor {
 
       return null;
     }
+
 
 
     private void init_form() {
@@ -200,6 +221,8 @@ namespace WinForm_VideoEditor {
     }
 
     private (int, int) convert_mousepos_to_objpos(int x, int y) {
+      y -= frameBarHeight;
+
       if (x < 0)
         x = 0;
 
@@ -213,13 +236,44 @@ namespace WinForm_VideoEditor {
       return (x - scroll_pos, y * LayerHeight);
     }
 
+    private bool _is_item_collid(int l, int r, int ll, int rr)
+      => l > ll ? _is_item_collid(ll, rr, l, r) : ll <= r;
+
+    private TLObject is_exists_obj_in_range(int layer, int pos, int len, TLObject ignore = null) {
+      foreach (var obj in objects) {
+        if (obj == ignore || obj.layer != layer)
+          continue;
+
+        if (pos <= obj.position && obj.position < pos + len)
+          return obj;
+
+        if (pos <= obj.endpos - 1 && obj.endpos - 1 < pos + len)
+          return obj;
+
+        if (obj.position <= pos && pos + len <= obj.position + obj.length)
+          return obj;
+      }
+
+      return null;
+    }
+
+    private TLObject check_obj_collid(TLObject obj) {
+      return is_exists_obj_in_range(obj.layer, obj.position, obj.length, obj);
+    }
+
     private void _pictureBox_layers_MouseDown(object sender, MouseEventArgs e) {
       var (ex, ey) = convert_mousepos_to_objpos(e.X, e.Y);
 
 
-      var obj = get_object_from_pos(ex, ey);
+      _clicked_obj = get_object_from_pos(ex, ey);
+      _clicked_obj_index = objects.IndexOf(_clicked_obj);
 
-      if (obj == null) {
+      if (_clicked_obj != null) {
+        _obj_collid = check_obj_collid(_clicked_obj);
+        _obj_collid_index = objects.IndexOf(_obj_collid);
+      }
+
+      if (_clicked_obj == null) {
         _is_mouse_down = true;
 
         if (e.Button == MouseButtons.Left) {
@@ -231,8 +285,7 @@ namespace WinForm_VideoEditor {
         if (e.Button == MouseButtons.Left) {
           _is_mouse_down = true;
           _mouse_behavior_kind = MouseBehaviorKind.MoveObject;
-          _obj_click_diff = obj.position - ex;
-          _clicked_obj = obj;
+          _obj_click_diff = _clicked_obj.position - ex;
         }
         else if (e.Button == MouseButtons.Right) {
           _mainform.ctxMenuStrip_tlobj.Show(this._pictureBox_layers, e.Location);
@@ -254,9 +307,44 @@ namespace WinForm_VideoEditor {
           this.seekbar_pos = ex;
           break;
 
-        case MouseBehaviorKind.MoveObject:
-          _clicked_obj.position = ex + _obj_click_diff;
+        case MouseBehaviorKind.MoveObject: {
+          ex += _obj_click_diff;
+          var collid = is_exists_obj_in_range(ey, ex, _clicked_obj.length, _clicked_obj);
+
+          if (collid != null) {
+            if (collid.center < ex - _obj_click_diff &&
+              is_exists_obj_in_range(ey, collid.endpos, _clicked_obj.length, _clicked_obj) == null) {
+              ex = collid.endpos;
+            }
+            else if (ex - _obj_click_diff < collid.center &&
+              is_exists_obj_in_range(ey, collid.position - _clicked_obj.length, _clicked_obj.length, _clicked_obj) == null) {
+              ex = collid.position - _clicked_obj.length;
+            }
+            else if (is_exists_obj_in_range(_clicked_obj.layer, ex, _clicked_obj.length, _clicked_obj) == null) {
+              ey = _clicked_obj.layer;
+            }
+            else {
+              break;
+            }
+
+            if (ex < 0) {
+              break;
+            }
+
+          }
+
+          (_clicked_obj.position, _clicked_obj.layer) = (ex, ey);
+
+          if (_clicked_obj.position < 0)
+            _clicked_obj.position = 0;
+
+          if (_clicked_obj != null) {
+            _obj_collid = check_obj_collid(_clicked_obj);
+            _obj_collid_index = objects.IndexOf(_obj_collid);
+          }
+
           break;
+        }
       }
 
 
@@ -276,7 +364,17 @@ namespace WinForm_VideoEditor {
           break;
 
         case MouseBehaviorKind.MoveObject:
-          _clicked_obj.position = ex + _obj_click_diff;
+          var collid = is_exists_obj_in_range(ey, ex + _obj_click_diff, _clicked_obj.length, _clicked_obj);
+
+          if (collid != null) {
+            break;
+          }
+
+          (_clicked_obj.position, _clicked_obj.layer) = (ex + _obj_click_diff, ey);
+
+          if (_clicked_obj.position < 0)
+            _clicked_obj.position = 0;
+
           break;
       }
 
