@@ -10,7 +10,18 @@ using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
   public partial class TLVideoObject : TLObject {
-    public string path;
+    string __path;
+
+    public string path {
+      get {
+        return __path;
+      }
+      set {
+        name = System.IO.Path.GetFileName(value);
+
+        __path = value;
+      }
+    }
 
     public TLVideoObject(int layer, int pos)
       : base(layer, pos) {

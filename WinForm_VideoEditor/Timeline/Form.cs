@@ -36,9 +36,11 @@ namespace WinForm_VideoEditor {
     int _obj_collid_index;
     int _clicked_obj_index;
     TLObject _clicked_obj;
+    Point _clickedPos;
     MouseBehaviorKind _mouse_behavior_kind;
 
     ContextMenuStrip ctxMenuStrip_tlobj;
+    ContextMenuStrip ctxMenuStrip_timeline;
 
     public int seekbar_pos;
     public int scroll_pos;
@@ -67,6 +69,11 @@ namespace WinForm_VideoEditor {
 
     public void add_object(TLObject obj) {
       objects.Add(obj);
+
+      // todo: rewrite
+      //while (check_obj_collid(obj) != null) {
+      //  obj.position++;
+      //}
     }
 
     private void init_form() {
@@ -87,6 +94,39 @@ namespace WinForm_VideoEditor {
       ctxMenuStrip_tlobj.Items.Add(new ToolStripSeparator());
       ctxMenuStrip_tlobj.Items.Add("Delete");
 
+      {
+        ctxMenuStrip_timeline = new ContextMenuStrip();
+
+        var item = new ToolStripMenuItem("Add object"); {
+          var dropdown = new ToolStripMenuItem("Text");
+          item.DropDownItems.Add(dropdown);
+
+          dropdown = new ToolStripMenuItem("Video");
+          dropdown.Click += (object sender, EventArgs e) => {
+            using (var openf = new OpenFileDialog()) {
+              openf.Title = "Load a video file (MP4)";
+              openf.Filter = "MP4 File|*.mp4";
+              openf.RestoreDirectory = true;
+
+              if (openf.ShowDialog() == DialogResult.OK) {
+                var obj = new TLVideoObject(0, 0);
+
+                obj.path = openf.FileName;
+                obj.length = 200;
+
+                add_object(obj);
+              }
+            }
+
+            draw();
+          };
+          item.DropDownItems.Add(dropdown);
+        }
+
+
+
+        ctxMenuStrip_timeline.Items.Add(item);
+      }
 
       _layers_bmp = new Bitmap(LayersBitmapSize.Width, LayersBitmapSize.Height);
       _layers_gra = Graphics.FromImage(_layers_bmp);

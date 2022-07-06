@@ -43,6 +43,8 @@
       this.pictureBox_seekBar = new System.Windows.Forms.PictureBox();
       this.button1 = new System.Windows.Forms.Button();
       this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.environmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuBar.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).BeginInit();
@@ -128,8 +130,11 @@
       // 
       // settingsToolStripMenuItem
       // 
+      this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editorToolStripMenuItem,
+            this.environmentToolStripMenuItem});
       this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-      this.settingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+      this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.settingsToolStripMenuItem.Text = "Settings";
       // 
       // toolStripSeparator3
@@ -200,6 +205,18 @@
       this.consoleToolStripMenuItem.Text = "console";
       this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
       // 
+      // editorToolStripMenuItem
+      // 
+      this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
+      this.editorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.editorToolStripMenuItem.Text = "Editor";
+      // 
+      // environmentToolStripMenuItem
+      // 
+      this.environmentToolStripMenuItem.Name = "environmentToolStripMenuItem";
+      this.environmentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.environmentToolStripMenuItem.Text = "Environment";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -245,6 +262,8 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem environmentToolStripMenuItem;
   }
 }
 
