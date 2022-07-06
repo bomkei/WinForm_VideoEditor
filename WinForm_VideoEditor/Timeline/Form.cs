@@ -22,22 +22,25 @@ namespace WinForm_VideoEditor {
       ChangeObjectLength_Right,
     }
 
+    struct MouseBehaviorContext {
+      public MouseBehaviorKind kind;
+      public bool isDown;
+      public int diff;
+      public TLObject clicked;
+      public TLObject collid;
+      public Point clickedPos;
+
+    }
+
     MainForm _mainform;
-    //TimelineCore _core;
 
     PictureBox _pictureBox_layers;
     Bitmap _layers_bmp;
     Graphics _layers_gra;
     Font _font;
 
-    bool _is_mouse_down;
-    int _obj_click_diff;
-    TLObject _obj_collid;
-    int _obj_collid_index;
-    int _clicked_obj_index;
-    TLObject _clicked_obj;
-    Point _clickedPos;
-    MouseBehaviorKind _mouse_behavior_kind;
+    MouseBehaviorContext msBehavContext;
+
 
     ContextMenuStrip ctxMenuStrip_tlobj;
     ContextMenuStrip ctxMenuStrip_timeline;

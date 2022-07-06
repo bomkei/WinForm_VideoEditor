@@ -71,7 +71,7 @@ namespace WinForm_VideoEditor {
 
           gra.FillRectangle(new SolidBrush(Color.DimGray), loc.X, loc.Y, obj.length, LayerHeight - 1);
 
-          if (obj == _clicked_obj) {
+          if (obj == msBehavContext.clicked) {
             gra.DrawRectangle(Pens.DodgerBlue, loc.X, loc.Y, obj.length - 1, LayerHeight - 1);
           }
           else {
@@ -112,7 +112,8 @@ namespace WinForm_VideoEditor {
           0, _pictureBox_layers.Height - barw, _pictureBox_layers.Width - 1, barw - 1);
 
         gra.DrawString(
-          $"Scrollpos={scroll_pos}, Seekbar={seekbar_pos}, Clicked={objects.IndexOf(_clicked_obj)}, Collid={_obj_collid_index}",
+          $"Scrollpos={scroll_pos}, Seekbar={seekbar_pos}," +
+          $"Clicked={objects.IndexOf(msBehavContext.clicked)}, Collid={objects.IndexOf(msBehavContext.collid)}",
           _font, Brushes.LightGray, 8, _pictureBox_layers.Height - barw + 4);
       }
 

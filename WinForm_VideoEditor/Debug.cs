@@ -19,9 +19,6 @@ namespace WinForm_VideoEditor {
 
       var filename = callStack.GetFileName();
 
-      filename = filename.Substring(filename.IndexOf("WinForm_VideoEditor"));
-      filename = filename.Substring(filename.IndexOf('\\') + 1);
-
       Console.ForegroundColor = ConsoleColor.Red;
       Console.Write($"\t#Alert {filename}: {callStack.GetMethod()}: {callStack.GetFileLineNumber()}");
 #endif
