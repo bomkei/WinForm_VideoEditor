@@ -174,16 +174,17 @@
       // pictureBox_preview
       // 
       this.pictureBox_preview.BackColor = System.Drawing.Color.Black;
+      this.pictureBox_preview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.pictureBox_preview.Location = new System.Drawing.Point(0, 24);
       this.pictureBox_preview.Name = "pictureBox_preview";
-      this.pictureBox_preview.Size = new System.Drawing.Size(640, 360);
+      this.pictureBox_preview.Size = new System.Drawing.Size(644, 364);
       this.pictureBox_preview.TabIndex = 1;
       this.pictureBox_preview.TabStop = false;
       // 
       // pictureBox_seekBar
       // 
       this.pictureBox_seekBar.BackColor = System.Drawing.Color.Gray;
-      this.pictureBox_seekBar.Location = new System.Drawing.Point(0, 384);
+      this.pictureBox_seekBar.Location = new System.Drawing.Point(0, 388);
       this.pictureBox_seekBar.Name = "pictureBox_seekBar";
       this.pictureBox_seekBar.Size = new System.Drawing.Size(589, 28);
       this.pictureBox_seekBar.TabIndex = 3;
@@ -191,7 +192,7 @@
       // 
       // button1
       // 
-      this.button1.Location = new System.Drawing.Point(590, 384);
+      this.button1.Location = new System.Drawing.Point(591, 388);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(50, 28);
       this.button1.TabIndex = 5;
@@ -231,6 +232,8 @@
       this.Name = "MainForm";
       this.Text = "Video Editor";
       this.Load += new System.EventHandler(this.MainForm_Load);
+      this.Shown += new System.EventHandler(this.MainForm_Shown);
+      this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
       this.menuBar.ResumeLayout(false);
       this.menuBar.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).EndInit();

@@ -15,6 +15,8 @@ namespace WinForm_VideoEditor {
 
     TimelineForm _timeline_form;  // Timeline
 
+    Graphics gra_preview;
+    Bitmap bmp_preview;
 
     [System.Runtime.InteropServices.DllImport("kernel32.dll")]
     private static extern bool AllocConsole();
@@ -23,6 +25,7 @@ namespace WinForm_VideoEditor {
     //  Constructor
     // ---------------------------------------------------------------- //
     public MainForm() {
+
       AllocConsole();
 
       init_form();
@@ -57,15 +60,6 @@ namespace WinForm_VideoEditor {
 
       // ------
 
-      var obj = new TLObject(0, 0);
-
-      obj.kind = TLObject.Kind.Text;
-      obj.length = 300;
-      obj.name = "";
-      tl.add_object(obj);
-
-      var vi = new TLVideoObject(@"C:\Users\mrzkr\Videos\2022-07-06 02-23-51.mkv.mp4", 2, 0);
-      tl.add_object(vi);
 
       // ------
 
@@ -83,15 +77,11 @@ namespace WinForm_VideoEditor {
 
       button1.GotFocus += (object obj, EventArgs e) => { this.ActiveControl = _timeline_form; };
 
+      bmp_preview = new Bitmap(640, 360);
+      gra_preview = Graphics.FromImage(bmp_preview);
+
       // Create a new timeline instance
       _timeline_form = init_timeline_inst(_timeline_form);
-
-      // Add timeline
-      Controls.Add(_timeline_form);
-
-      // Show timeline
-      _timeline_form.Show();
-
 
     }
 
@@ -101,11 +91,28 @@ namespace WinForm_VideoEditor {
 
     private void MainForm_Load(object sender, EventArgs e) {
 
+      // Add timeline
+      Controls.Add(_timeline_form);
+
       this.ActiveControl = _timeline_form;
 
     }
 
+    private void MainForm_Shown(object sender, EventArgs e) {
+
+      // Show timeline
+      _timeline_form.Show();
+
+
+    }
+
     private void consoleToolStripMenuItem_Click(object sender, EventArgs e) {
+
+    }
+
+    private void MainForm_Paint(object sender, PaintEventArgs e) {
+
+      //drawPreview(_timeline_form.seekbar_pos);
 
     }
 

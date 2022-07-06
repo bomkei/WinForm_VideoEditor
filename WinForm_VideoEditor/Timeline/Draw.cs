@@ -117,6 +117,10 @@ namespace WinForm_VideoEditor {
           _font, Brushes.LightGray, 8, _pictureBox_layers.Height - barw + 4);
       }
 
+      if (_mainform != null) {
+        _mainform.drawPreview(seekbar_pos);
+      }
+
       _pictureBox_layers.Image = _layers_bmp;
     }
   }

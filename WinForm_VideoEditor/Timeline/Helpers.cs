@@ -72,7 +72,7 @@ namespace WinForm_VideoEditor {
           ret.Add((obj, pos - obj.position));
       }
 
-      return ret;
+      return ret.OrderBy(x => x.Item1.layer).ToList();
     }
   }
 }

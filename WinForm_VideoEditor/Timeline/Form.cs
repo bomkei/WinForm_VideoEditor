@@ -110,10 +110,7 @@ namespace WinForm_VideoEditor {
               openf.RestoreDirectory = true;
 
               if (openf.ShowDialog() == DialogResult.OK) {
-                var obj = new TLVideoObject(0, 0);
-
-                obj.path = openf.FileName;
-                obj.length = 200;
+                var obj = new TLVideoObject(openf.FileName, 0, 0);
 
                 add_object(obj);
               }
@@ -136,7 +133,7 @@ namespace WinForm_VideoEditor {
       objects = new List<TLObject>();
 
       this.Paint += (object obj, PaintEventArgs e) => { draw(); };
-      this.SizeChanged += TimelineForm_SizeChanged;
+      //this.SizeChanged += TimelineForm_SizeChanged;
 
       this.KeyDown += TimelineForm_KeyDown;
       this.KeyUp += TimelineForm_KeyUp;

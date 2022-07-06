@@ -17,6 +17,8 @@ namespace WinForm_VideoEditor {
     public string path { get; private set; }
 
     public VideoCapture vcap;
+    public int X;
+    public int Y;
 
     public TLVideoObject(string path, int layer, int pos)
       : base(layer, pos) {
@@ -26,6 +28,7 @@ namespace WinForm_VideoEditor {
 
       vcap = new VideoCapture(path);
 
+      this.length = vcap.FrameCount;
 
     }
 
