@@ -15,14 +15,14 @@ namespace WinForm_VideoEditor {
     readonly int frameBarHeight = 16;
 
     readonly Size LayersBitmapSize = new Size(2000, 1100);
-    enum MouseBehaviorKind {
+    public enum MouseBehaviorKind {
       MoveSeekbar,
       MoveObject,
       ChangeObjectLength_Left,
       ChangeObjectLength_Right,
     }
 
-    struct MouseBehaviorContext {
+    public struct MouseBehaviorContext {
       public MouseBehaviorKind kind;
       public bool isDown;
       public int diff;
@@ -39,12 +39,10 @@ namespace WinForm_VideoEditor {
     Graphics _layers_gra;
     Font _font;
 
-    MouseBehaviorContext msBehavContext;
-
-
     ContextMenuStrip ctxMenuStrip_tlobj;
     ContextMenuStrip ctxMenuStrip_timeline;
 
+    public MouseBehaviorContext msBehavContext;
     public int seekbar_pos;
     public int scroll_pos;
 

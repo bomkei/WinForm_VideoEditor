@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
   public partial class TimelineForm : Form {
-    public TLObject get_object_from_pos(int pos, int layer) {
+    TLObject get_object_from_pos(int pos, int layer) {
       foreach (var obj in objects) {
         if (obj.layer != layer)
           continue;
@@ -23,7 +23,7 @@ namespace WinForm_VideoEditor {
       return null;
     }
 
-    private (int, int) convert_mousepos_to_objpos(int x, int y) {
+    (int, int) convert_mousepos_to_objpos(int x, int y) {
       y -= frameBarHeight;
 
       if (x < 0)
@@ -35,14 +35,14 @@ namespace WinForm_VideoEditor {
       return (x + scroll_pos, y / LayerHeight);
     }
 
-    private (int, int) convert_objpos_to_mousepos(int x, int y) {
+    (int, int) convert_objpos_to_mousepos(int x, int y) {
       return (x - scroll_pos, y * LayerHeight);
     }
 
-    private bool _is_item_collid(int l, int r, int ll, int rr)
+    bool _is_item_collid(int l, int r, int ll, int rr)
       => l > ll ? _is_item_collid(ll, rr, l, r) : ll <= r;
 
-    private TLObject is_exists_obj_in_range(int layer, int pos, int len, TLObject ignore = null) {
+    TLObject is_exists_obj_in_range(int layer, int pos, int len, TLObject ignore = null) {
       foreach (var obj in objects) {
         if (obj == ignore || obj.layer != layer)
           continue;
@@ -60,8 +60,19 @@ namespace WinForm_VideoEditor {
       return null;
     }
 
-    private TLObject check_obj_collid(TLObject obj) {
+    TLObject check_obj_collid(TLObject obj) {
       return is_exists_obj_in_range(obj.layer, obj.position, obj.length, obj);
+    }
+
+    public List<(TLObject, int)> get_objects_on_position(int pos) {
+      var ret = new List<(TLObject, int)>();
+
+      foreach (var obj in objects) {
+        if (obj.position <= pos && pos < obj.endpos)
+          ret.Add((obj, pos - obj.position));
+      }
+
+      return ret;
     }
   }
 }

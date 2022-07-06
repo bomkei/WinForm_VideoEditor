@@ -64,10 +64,7 @@ namespace WinForm_VideoEditor {
       obj.name = "";
       tl.add_object(obj);
 
-      var vi = new TLVideoObject(2, 0);
-      vi.path = @"C:\Users\mrzkr\Videos\2022-07-06 02-23-51.mkv.mp4";
-      vi.name = Path.GetFileName(vi.path);
-      vi.length = 150;
+      var vi = new TLVideoObject(@"C:\Users\mrzkr\Videos\2022-07-06 02-23-51.mkv.mp4", 2, 0);
       tl.add_object(vi);
 
       // ------
