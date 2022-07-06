@@ -13,24 +13,26 @@ namespace WinForm_VideoEditor {
 
 
     private void _pictureBox_layers_MouseDown(object sender, MouseEventArgs e) {
+      ref var ctx = ref msBehavContext;
+      
       var (ex, ey) =
-        (msBehavContext.clickedPos.X, msBehavContext.clickedPos.Y) =
+        (ctx.clickedPos.X, ctx.clickedPos.Y) =
         convert_mousepos_to_objpos(e.X, e.Y);
 
       Console.WriteLine($"{ex}, {ey}");
 
-      msBehavContext.clicked = get_object_from_pos(ex, ey);
-      var clickedIndex = objects.IndexOf(msBehavContext.clicked);
+      ctx.clicked = get_object_from_pos(ex, ey);
+      var clickedIndex = objects.IndexOf(ctx.clicked);
 
-      if (msBehavContext.clicked != null) {
-        msBehavContext.collid = check_obj_collid(msBehavContext.clicked);
+      if (ctx.clicked != null) {
+        ctx.collid = check_obj_collid(ctx.clicked);
         //_obj_collid_index = objects.IndexOf(_obj_collid);
       }
 
-      if (msBehavContext.clicked == null) {
+      if (ctx.clicked == null) {
         if (e.Button == MouseButtons.Left) {
-          msBehavContext.isDown = true;
-          msBehavContext.kind = MouseBehaviorKind.MoveSeekbar;
+          ctx.isDown = true;
+          ctx.kind = MouseBehaviorKind.MoveSeekbar;
           seekbar_pos = ex;
         }
         else if (e.Button == MouseButtons.Right) {
@@ -39,9 +41,9 @@ namespace WinForm_VideoEditor {
       }
       else {
         if (e.Button == MouseButtons.Left) {
-          msBehavContext.isDown = true;
-          msBehavContext.kind = MouseBehaviorKind.MoveObject;
-          msBehavContext.diff = msBehavContext.clicked.position - ex;
+          ctx.isDown = true;
+          ctx.kind = MouseBehaviorKind.MoveObject;
+          ctx.diff = ctx.clicked.position - ex;
         }
         else if (e.Button == MouseButtons.Right) {
           ctxMenuStrip_tlobj.Show(_pictureBox_layers, e.Location);
@@ -53,31 +55,32 @@ namespace WinForm_VideoEditor {
     }
 
     private void _pictureBox_layers_MouseMove(object sender, MouseEventArgs e) {
+      ref var ctx = ref msBehavContext;
       var (ex, ey) = convert_mousepos_to_objpos(e.X, e.Y);
 
-      if (!msBehavContext.isDown)
+      if (!ctx.isDown)
         return;
 
-      switch (msBehavContext.kind) {
+      switch (ctx.kind) {
         case MouseBehaviorKind.MoveSeekbar:
           seekbar_pos = ex;
           break;
 
         case MouseBehaviorKind.MoveObject: {
-          ex += msBehavContext.diff;
-          var collid = is_exists_obj_in_range(ey, ex, msBehavContext.clicked.length, msBehavContext.clicked);
+          ex += ctx.diff;
+          var collid = is_exists_obj_in_range(ey, ex, ctx.clicked.length, ctx.clicked);
 
           if (collid != null) {
-            if (collid.center < ex - msBehavContext.diff &&
-              is_exists_obj_in_range(ey, collid.endpos, msBehavContext.clicked.length, msBehavContext.clicked) == null) {
+            if (collid.center < ex - ctx.diff &&
+              is_exists_obj_in_range(ey, collid.endpos, ctx.clicked.length, ctx.clicked) == null) {
               ex = collid.endpos;
             }
-            else if (ex - msBehavContext.diff < collid.center &&
-              is_exists_obj_in_range(ey, collid.position - msBehavContext.clicked.length, msBehavContext.clicked.length, msBehavContext.clicked) == null) {
-              ex = collid.position - msBehavContext.clicked.length;
+            else if (ex - ctx.diff < collid.center &&
+              is_exists_obj_in_range(ey, collid.position - ctx.clicked.length, ctx.clicked.length, ctx.clicked) == null) {
+              ex = collid.position - ctx.clicked.length;
             }
-            else if (is_exists_obj_in_range(msBehavContext.clicked.layer, ex, msBehavContext.clicked.length, msBehavContext.clicked) == null) {
-              ey = msBehavContext.clicked.layer;
+            else if (is_exists_obj_in_range(ctx.clicked.layer, ex, ctx.clicked.length, ctx.clicked) == null) {
+              ey = ctx.clicked.layer;
             }
             else {
               break;
@@ -88,13 +91,13 @@ namespace WinForm_VideoEditor {
             }
           }
 
-          (msBehavContext.clicked.position, msBehavContext.clicked.layer) = (ex, ey);
+          (ctx.clicked.position, ctx.clicked.layer) = (ex, ey);
 
-          if (msBehavContext.clicked.position < 0)
-            msBehavContext.clicked.position = 0;
+          if (ctx.clicked.position < 0)
+            ctx.clicked.position = 0;
 
-          if (msBehavContext.clicked != null) {
-            msBehavContext.collid = check_obj_collid(msBehavContext.clicked);
+          if (ctx.clicked != null) {
+            ctx.collid = check_obj_collid(ctx.clicked);
             //_obj_collid_index = objects.IndexOf(_obj_collid);
           }
 
@@ -107,13 +110,14 @@ namespace WinForm_VideoEditor {
     }
 
     private void _pictureBox_layers_MouseUp(object sender, MouseEventArgs e) {
+      ref var ctx = ref msBehavContext;
       var (ex, ey) = convert_mousepos_to_objpos(e.X, e.Y);
 
-      if (!msBehavContext.isDown) {
+      if (!ctx.isDown) {
         return;
       }
 
-      switch (msBehavContext.kind) {
+      switch (ctx.kind) {
         case MouseBehaviorKind.MoveSeekbar:
           seekbar_pos = ex;
           break;
@@ -124,7 +128,7 @@ namespace WinForm_VideoEditor {
           break;
       }
 
-      msBehavContext.isDown = false;
+      ctx.isDown = false;
 
       draw();
     }
