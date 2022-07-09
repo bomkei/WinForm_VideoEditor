@@ -16,7 +16,7 @@ namespace WinForm_VideoEditor {
     readonly int preview_bitmap_width = 640;
     readonly int preview_bitmap_height= 360;
 
-    TimelineForm _timeline_form;  // Timeline
+    Timeline _timeline;  // Timeline
 
     Graphics gra_preview;
     Bitmap bmp_preview;
@@ -41,25 +41,25 @@ namespace WinForm_VideoEditor {
     // ---------------------------------------------------------------- //
     //  Create and Initialize TimelineForm instance
     // ---------------------------------------------------------------- //
-    TimelineForm init_timeline_inst(TimelineForm tl) {
+    Timeline init_timeline_inst(Timeline tl) {
 
       // Create instance
-      tl = new TimelineForm(this);
+      tl = new Timeline(this);
 
-      // Disable 'TopLevel' flag
-      tl.TopLevel = false;
+      //// Disable 'TopLevel' flag
+      //tl.TopLevel = false;
 
-      // Set border style
-      tl.FormBorderStyle = FormBorderStyle.None;
+      //// Set border style
+      //tl.FormBorderStyle = FormBorderStyle.None;
 
-      // Anchor
-      tl.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+      //// Anchor
+      //tl.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
 
-      // Location on MainForm
-      tl.Location = new Point(0, pictureBox_seekBar.Bottom);
+      //// Location on MainForm
+      //tl.Location = new Point(0, pictureBox_seekBar.Bottom);
 
-      // Size
-      tl.Size = new Size(Width - 16, this.ClientSize.Height - pictureBox_seekBar.Bottom);
+      //// Size
+      //tl.Size = new Size(Width - 16, this.ClientSize.Height - pictureBox_seekBar.Bottom);
 
 
       // ------
@@ -79,7 +79,7 @@ namespace WinForm_VideoEditor {
     void init_form() {
       InitializeComponent();
 
-      button1.GotFocus += (object obj, EventArgs e) => { this.ActiveControl = _timeline_form; };
+      button1.GotFocus += (object obj, EventArgs e) => { pictureBox_timeline.Focus(); };
 
       bmp_preview = new Bitmap(preview_bitmap_width, preview_bitmap_height);
       bmp_preview_black = new Bitmap(preview_bitmap_width, preview_bitmap_height);
@@ -90,7 +90,7 @@ namespace WinForm_VideoEditor {
       }
 
       // Create a new timeline instance
-      _timeline_form = init_timeline_inst(_timeline_form);
+      _timeline = init_timeline_inst(_timeline);
 
     }
 
@@ -100,17 +100,10 @@ namespace WinForm_VideoEditor {
 
     private void MainForm_Load(object sender, EventArgs e) {
 
-      // Add timeline
-      Controls.Add(_timeline_form);
-
-      this.ActiveControl = _timeline_form;
 
     }
 
     private void MainForm_Shown(object sender, EventArgs e) {
-
-      // Show timeline
-      _timeline_form.Show();
 
 
     }
@@ -122,6 +115,8 @@ namespace WinForm_VideoEditor {
     private void MainForm_Paint(object sender, PaintEventArgs e) {
 
       //drawPreview(_timeline_form.seekbar_pos);
+
+      _timeline.draw();
 
     }
 

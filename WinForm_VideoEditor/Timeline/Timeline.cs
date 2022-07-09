@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-  public partial class TimelineForm {
+  public partial class Timeline {
 
     readonly int LayerHeight = 24;
     readonly int frameBarHeight = 16;
@@ -54,18 +54,13 @@ namespace WinForm_VideoEditor {
       private set;
     }
 
-    public TimelineForm(MainForm mainform) {
+    public Timeline(MainForm mainform) {
 
       _mainform = mainform;
+      _pictureBox_layers = mainform.pictureBox_timeline;
 
       init_form();
 
-    }
-
-    ~TimelineForm() {
-      _layers_gra.Dispose();
-      _layers_bmp.Dispose();
-      _font.Dispose();
     }
 
     public void add_object(TLObject obj) {
@@ -79,8 +74,8 @@ namespace WinForm_VideoEditor {
 
     private void init_form() {
 
-      _pictureBox_layers = new PictureBox();
-      _pictureBox_layers.Dock = DockStyle.Fill;
+      //_pictureBox_layers = new PictureBox();
+      //_pictureBox_layers.Dock = DockStyle.Fill;
       _pictureBox_layers.MouseDown += _pictureBox_layers_MouseDown;
       _pictureBox_layers.MouseMove += _pictureBox_layers_MouseMove;
       _pictureBox_layers.MouseUp += _pictureBox_layers_MouseUp;
@@ -132,13 +127,13 @@ namespace WinForm_VideoEditor {
 
       objects = new List<TLObject>();
 
-      this.Paint += (object obj, PaintEventArgs e) => { draw(); };
-      //this.SizeChanged += TimelineForm_SizeChanged;
+      //this.Paint += (object obj, PaintEventArgs e) => { draw(); };
+      ////this.SizeChanged += TimelineForm_SizeChanged;
 
-      this.KeyDown += TimelineForm_KeyDown;
-      this.KeyUp += TimelineForm_KeyUp;
+      //this.KeyDown += TimelineForm_KeyDown;
+      //this.KeyUp += TimelineForm_KeyUp;
 
-      Controls.Add(_pictureBox_layers);
+      //Controls.Add(_pictureBox_layers);
 
       video_FPS = 60;
       tlScale = 1.0;

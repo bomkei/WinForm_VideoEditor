@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-  public partial class TimelineForm {
+  public partial class Timeline {
 
     private void TimelineForm_SizeChanged(object sender, EventArgs e) {
       draw();

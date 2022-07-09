@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-  public partial class TimelineForm {
+  public partial class Timeline {
     TLObject get_object_from_pos(int pos, int layer) {
       foreach (var obj in objects) {
         if (obj.layer != layer)

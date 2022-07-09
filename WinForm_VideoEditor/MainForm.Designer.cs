@@ -34,20 +34,22 @@
       this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
       this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.environmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
       this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.controlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.pictureBox_preview = new System.Windows.Forms.PictureBox();
       this.pictureBox_seekBar = new System.Windows.Forms.PictureBox();
       this.button1 = new System.Windows.Forms.Button();
-      this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.environmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.pictureBox_timeline = new System.Windows.Forms.PictureBox();
       this.menuBar.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox_timeline)).BeginInit();
       this.SuspendLayout();
       // 
       // menuBar
@@ -134,8 +136,20 @@
             this.editorToolStripMenuItem,
             this.environmentToolStripMenuItem});
       this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-      this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.settingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
       this.settingsToolStripMenuItem.Text = "Settings";
+      // 
+      // editorToolStripMenuItem
+      // 
+      this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
+      this.editorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+      this.editorToolStripMenuItem.Text = "Editor";
+      // 
+      // environmentToolStripMenuItem
+      // 
+      this.environmentToolStripMenuItem.Name = "environmentToolStripMenuItem";
+      this.environmentToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+      this.environmentToolStripMenuItem.Text = "Environment";
       // 
       // toolStripSeparator3
       // 
@@ -171,6 +185,13 @@
       this.controlToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
       this.controlToolStripMenuItem.Text = "Control ";
       // 
+      // consoleToolStripMenuItem
+      // 
+      this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+      this.consoleToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+      this.consoleToolStripMenuItem.Text = "console";
+      this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
+      // 
       // pictureBox_preview
       // 
       this.pictureBox_preview.BackColor = System.Drawing.Color.Black;
@@ -199,24 +220,16 @@
       this.button1.Text = "再生";
       this.button1.UseVisualStyleBackColor = true;
       // 
-      // consoleToolStripMenuItem
+      // pictureBox_timeline
       // 
-      this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-      this.consoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.consoleToolStripMenuItem.Text = "console";
-      this.consoleToolStripMenuItem.Click += new System.EventHandler(this.consoleToolStripMenuItem_Click);
-      // 
-      // editorToolStripMenuItem
-      // 
-      this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-      this.editorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.editorToolStripMenuItem.Text = "Editor";
-      // 
-      // environmentToolStripMenuItem
-      // 
-      this.environmentToolStripMenuItem.Name = "environmentToolStripMenuItem";
-      this.environmentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.environmentToolStripMenuItem.Text = "Environment";
+      this.pictureBox_timeline.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.pictureBox_timeline.Location = new System.Drawing.Point(0, 416);
+      this.pictureBox_timeline.Name = "pictureBox_timeline";
+      this.pictureBox_timeline.Size = new System.Drawing.Size(949, 208);
+      this.pictureBox_timeline.TabIndex = 6;
+      this.pictureBox_timeline.TabStop = false;
       // 
       // MainForm
       // 
@@ -224,6 +237,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
       this.ClientSize = new System.Drawing.Size(949, 624);
+      this.Controls.Add(this.pictureBox_timeline);
       this.Controls.Add(this.button1);
       this.Controls.Add(this.pictureBox_seekBar);
       this.Controls.Add(this.pictureBox_preview);
@@ -238,6 +252,7 @@
       this.menuBar.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_preview)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_seekBar)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBox_timeline)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -267,6 +282,7 @@
     private System.Windows.Forms.ToolStripMenuItem consoleToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem environmentToolStripMenuItem;
+    public System.Windows.Forms.PictureBox pictureBox_timeline;
   }
 }
 

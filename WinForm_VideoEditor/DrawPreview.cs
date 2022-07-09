@@ -44,7 +44,7 @@ namespace WinForm_VideoEditor {
         
         _preview_drawing = true;
 
-        var objlist = _timeline_form.get_objects_on_position(pos);
+        var objlist = _timeline.get_objects_on_position(pos);
         ref var gra = ref gra_preview;
 
         // これ重い
