@@ -13,10 +13,14 @@ using System.Windows.Forms;
 namespace WinForm_VideoEditor {
   public partial class MainForm : Form {
 
+    readonly int preview_bitmap_width = 640;
+    readonly int preview_bitmap_height= 360;
+
     TimelineForm _timeline_form;  // Timeline
 
     Graphics gra_preview;
     Bitmap bmp_preview;
+    Bitmap bmp_preview_black;
 
     [System.Runtime.InteropServices.DllImport("kernel32.dll")]
     private static extern bool AllocConsole();
@@ -55,7 +59,7 @@ namespace WinForm_VideoEditor {
       tl.Location = new Point(0, pictureBox_seekBar.Bottom);
 
       // Size
-      tl.Size = new Size(Width - 16, Height - pictureBox_seekBar.Bottom - 38);
+      tl.Size = new Size(Width - 16, this.ClientSize.Height - pictureBox_seekBar.Bottom);
 
 
       // ------
@@ -77,8 +81,13 @@ namespace WinForm_VideoEditor {
 
       button1.GotFocus += (object obj, EventArgs e) => { this.ActiveControl = _timeline_form; };
 
-      bmp_preview = new Bitmap(640, 360);
+      bmp_preview = new Bitmap(preview_bitmap_width, preview_bitmap_height);
+      bmp_preview_black = new Bitmap(preview_bitmap_width, preview_bitmap_height);
       gra_preview = Graphics.FromImage(bmp_preview);
+
+      using (var g = Graphics.FromImage(bmp_preview_black)) {
+        g.Clear(Color.Black);
+      }
 
       // Create a new timeline instance
       _timeline_form = init_timeline_inst(_timeline_form);

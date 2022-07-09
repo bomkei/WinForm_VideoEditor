@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-  public partial class TimelineForm : Form {
+  public partial class TimelineForm {
     public void draw() {
 
       ref var gra = ref _layers_gra;

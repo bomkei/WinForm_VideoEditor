@@ -96,25 +96,15 @@
     <Compile Include="DrawPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Timeline\Draw.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Timeline\Events.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Timeline\Helpers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Timeline\MouseEvents.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Timeline\Draw.cs" />
+    <Compile Include="Timeline\Events.cs" />
+    <Compile Include="Timeline\Helpers.cs" />
+    <Compile Include="Timeline\MouseEvents.cs" />
     <Compile Include="Timeline\TLObject\TLObject.cs" />
     <Compile Include="ObjectConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Timeline\Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Timeline\Form.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

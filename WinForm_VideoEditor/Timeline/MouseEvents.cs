@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace WinForm_VideoEditor {
-  public partial class TimelineForm : Form {
+  public partial class TimelineForm {
 
 
     private void _pictureBox_layers_MouseDown(object sender, MouseEventArgs e) {

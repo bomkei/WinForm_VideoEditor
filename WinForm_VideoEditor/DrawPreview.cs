@@ -47,15 +47,18 @@ namespace WinForm_VideoEditor {
         var objlist = _timeline_form.get_objects_on_position(pos);
         ref var gra = ref gra_preview;
 
-        //gra.Clear(Color.Black);
+        // これ重い
+        // gra.Clear(Color.Black);
 
         foreach (var obj in objlist) {
           drawObject(ref gra, obj.Item1, obj.Item2);
         }
 
-        //pictureBox_preview.Image = bmp_preview;
-
-        pictureBox_preview.Image = bmp_preview;
+        try {
+          pictureBox_preview.Image = bmp_preview;
+        } // これどうにかしろ
+        catch( Exception ex ) {
+        }
 
         _preview_drawing = false;
         mtx.ReleaseMutex();
@@ -65,12 +68,17 @@ namespace WinForm_VideoEditor {
       if (_preview_drawing) {
         return;
       }
-      else if (t.ThreadState != ThreadState.Unstarted) {
+      
+      Console.WriteLine("draw preview");
+
+      try {
         t.Join();
       }
+      catch( Exception ex ) {
+      }
 
-      Console.WriteLine("draw preview");
       t.Start();
+      
       //pictureBox_preview.Image = bmp_preview;
 
       //if (_preview_drawing || _timeline_form == null) {
